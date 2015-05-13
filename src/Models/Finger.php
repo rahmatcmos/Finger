@@ -60,6 +60,7 @@ class Finger extends BaseModel {
 	public $searchable 				= 	[
 											'id' 						=> 'ID', 
 											'personid' 					=> 'PersonID', 
+											'stillwork' 				=> 'StillWork', 
 											'withattributes' 			=> 'WithAttributes'
 										];
 

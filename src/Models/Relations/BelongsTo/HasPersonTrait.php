@@ -20,4 +20,8 @@ trait HasPersonTrait {
 		return $this->belongsTo('ThunderID\Person\Models\Person');
 	}
 
+	public function ScopeStillWork($query, $variable)
+	{
+		return $query->WhereHas('person', function($q)use($variable){$q->CurrentWork($variable);});
+	}
 }

@@ -89,6 +89,7 @@ seed (run in windows)
  * Document Searchable :
  * 	id 								: Search by id, parameter => string, id
 	personid 						: Search by person_id, parameter => string, person_id
+	stillwork 						: Search by organisation where person work, parameter => string, organisation where person work
 	withattributes					: Search with relationship, parameter => array of relationship (ex : ['chart', 'person'], if relationship is belongsTo then return must be single object, if hasMany or belongsToMany then return must be plural object)
 
 /* ----------------------------------------------------------------------
