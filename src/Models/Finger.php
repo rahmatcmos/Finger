@@ -23,11 +23,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /* ----------------------------------------------------------------------
  * Document Relationship :
  * 	//other package
- 	2 Relationships belongsTo 
+ 	1 Relationship belongsTo 
 	{
-		Chart
 		Person
-		Calendar
 	}
 
  * ---------------------------------------------------------------------- */
