@@ -61,6 +61,7 @@ class Finger extends BaseModel {
 											'id' 						=> 'ID', 
 											'personid' 					=> 'PersonID', 
 											'stillwork' 				=> 'StillWork', 
+											'updatedat' 				=> 'UpdatedAt', 
 											'withattributes' 			=> 'WithAttributes'
 										];
 
@@ -110,6 +111,11 @@ class Finger extends BaseModel {
 	public function scopePersonID($query, $variable)
 	{
 		return $query->where('person_id', $variable);
+	}
+
+	public function scopeUpdatedAt($query, $variable)
+	{
+		return $query->where('updated_at', '>=', $variable);
 	}
 
 	public function scopeWithAttributes($query, $variable)

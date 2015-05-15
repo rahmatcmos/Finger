@@ -17,7 +17,7 @@ class FingerController extends Controller {
 	protected $controller_name 		= 'finger';
 
 	/**
-	 * login form
+	 * finger store
 	 *
 	 * @return void
 	 * @author 
@@ -102,6 +102,45 @@ class FingerController extends Controller {
 		}
 
 		DB::commit();
+
+		return Response::json(['message' => 'Sukses'], 200);
+	}
+
+	/**
+	 * finger store
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	public function update()
+	{
+		$attributes 							= Input::only('application', 'update');
+		if(!$attributes['application'])
+		{
+			return Response::json(['message' => 'Server Error'], 500);
+		}
+
+		$api 									= $attributes['application']['api'];
+		if($api['client']!='123456789' || $api['secret']!='123456789')
+		{
+			return Response::json(['message' => 'Not Found'], 404);
+		}
+
+		if(!$attributes['update'])
+		{
+			return Response::json(['message' => 'Server Error'], 500);
+		}
+
+		if(isset($attributes['update']))
+		{
+			$search	 							= ['displayupdatedfinger' => date('Y-m-d H:i:s', strtotime($attributes['update']))];
+			
+			$sort 								= ['persons.created_at' => 'asc'];
+
+			$contents 							= $this->dispatch(new Getting(new Person, $search, $sort , 1, 100));
+		
+			return $contents;
+		}
 
 		return Response::json(['message' => 'Sukses'], 200);
 	}
