@@ -44,19 +44,49 @@ class FingerController extends Controller {
 
 		if(isset($attributes['template']))
 		{
-			$attributes['template']					= (array)$attributes['template'];
+			$attributes['template']				= (array)$attributes['template'];
 			foreach ($attributes['template'] as $key => $value) 
 			{
-				$log['left_thumb']					= $value[1];
-				$log['left_index_finger']			= $value[2];
-				$log['left_middle_finger']			= $value[3];
-				$log['left_ring_finger']			= $value[4];
-				$log['left_little_finger']			= $value[5];
-				$log['right_thumb']					= $value[6];
-				$log['right_index_finger']			= $value[7];
-				$log['right_middle_finger']			= $value[8];
-				$log['right_ring_finger']			= $value[9];
-				$log['right_little_finger']			= $value[10];
+				if(strtoupper($value[1])!='NULL')
+				{
+					$log['left_thumb']			= $value[1];
+				}
+				if(strtoupper($value[2])!='NULL')
+				{
+					$log['left_index_finger']	= $value[2];
+				}
+				if(strtoupper($value[3])!='NULL')
+				{
+					$log['left_middle_finger']	= $value[3];
+				}
+				if(strtoupper($value[4])!='NULL')
+				{
+					$log['left_ring_finger']	= $value[4];
+				}
+				if(strtoupper($value[5])!='NULL')
+				{
+					$log['left_little_finger']	= $value[5];
+				}
+				if(strtoupper($value[6])!='NULL')
+				{
+					$log['right_thumb']			= $value[6];
+				}
+				if(strtoupper($value[7])!='NULL')
+				{
+					$log['right_index_finger']	= $value[7];
+				}
+				if(strtoupper($value[8])!='NULL')
+				{
+					$log['right_middle_finger']	= $value[8];
+				}
+				if(strtoupper($value[9])!='NULL')
+				{
+					$log['right_ring_finger']	= $value[9];
+				}
+				if(strtoupper($value[10])!='NULL')
+				{
+					$log['right_little_finger']	= $value[10];
+				}
 
 				$data 							= $this->dispatch(new Getting(new Person, ['email' => $value[0]], [] ,1, 1));
 				$person 						= json_decode($data);
