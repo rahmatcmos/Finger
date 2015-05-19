@@ -144,4 +144,47 @@ class FingerController extends Controller {
 
 		return Response::json(['message' => 'Sukses'], 200);
 	}
+
+	/**
+	 * finger store
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	public function random()
+	{
+		$attributes 							= Input::only('application');
+		if(!$attributes['application'])
+		{
+			return Response::json(['message' => 'Server Error'], 500);
+		}
+
+		$api 									= $attributes['application']['api'];
+		if($api['client']!='123456789' || $api['secret']!='123456789')
+		{
+			return Response::json(['message' => 'Not Found'], 404);
+		}
+
+		$random 								= 	[
+														'left_thumb', 
+														'left_index_finger', 
+														'left_middle_finger', 
+														'left_ring_finger', 
+														'left_little_finger',
+														'right_thumb', 
+														'right_index_finger', 
+														'right_middle_finger', 
+														'right_ring_finger', 
+														'right_little_finger',
+													];
+
+		$count 									= 3;
+
+		foreach (range(1, $count) as $index) 
+		{
+			$content[]							= $random[rand(0, count($random)-1)];
+		}	
+	
+		return Response::json(['finger' => $content], 200);
+	}
 }
