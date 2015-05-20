@@ -169,7 +169,9 @@ class FingerController extends Controller {
 
 			$contents 							= $this->dispatch(new Getting(new Person, $search, $sort , 1, 100));
 		
-			return $contents;
+			$data 								= json_decode($contents);
+
+			return $data->data; exit;
 		}
 
 		return Response::json(['message' => 'Sukses'], 200);
