@@ -167,11 +167,21 @@ class FingerController extends Controller {
 			
 			$sort 								= ['persons.created_at' => 'asc'];
 
-			$contents 							= $this->dispatch(new Getting(new Person, $search, $sort , 1, 100));
+			$results 							= $this->dispatch(new Getting(new Person, $search, $sort , 1, 100));
 		
-			$data 								= json_decode($contents);
+			$contents 							= json_decode($results);
 
-			return $data->data; exit;
+			if(!$contents->meta->success)
+			{
+				App::abort(404);
+			}
+			
+			$data 								= json_decode(json_encode($contents->data), true);
+			$data 								= json_encode($data);
+
+			$data 								= str_replace('\/', '/', $data);
+
+			return $data; exit;
 		}
 
 		return Response::json(['message' => 'Sukses'], 200);
