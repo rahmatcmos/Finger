@@ -144,7 +144,7 @@ class FingerController extends Controller {
 	 **/
 	public function update()
 	{
-		$attributes 							= Input::only('application', 'update');
+		$attributes 							= Input::only('application', 'update', 'page', 'limit');
 		if(!$attributes['application'])
 		{
 			return Response::json(['message' => 'Server Error'], 500);
@@ -161,13 +161,23 @@ class FingerController extends Controller {
 			return Response::json(['message' => 'Server Error'], 500);
 		}
 
+		if(!isset($attributes['page']))
+		{
+			$attributes['page'] 				= 1;
+		}
+
+		if(!isset($attributes['limit']))
+		{
+			$attributes['limit'] 				= 100;
+		}
+
 		if(isset($attributes['update']))
 		{
 			$search	 							= ['displayupdatedfinger' => date('Y-m-d H:i:s', strtotime($attributes['update']))];
 			
 			$sort 								= ['persons.created_at' => 'asc'];
 
-			$results 							= $this->dispatch(new Getting(new Person, $search, $sort , 1, 100));
+			$results 							= $this->dispatch(new Getting(new Person, $search, $sort , $attributes['page'], $attributes['limit']));
 		
 			$contents 							= json_decode($results);
 
@@ -177,6 +187,11 @@ class FingerController extends Controller {
 			}
 			
 			$data 								= json_decode(json_encode($contents->data), true);
+			if(!count($data))
+			{
+				return Response::json(['message' => 'Empty'], 200);
+			}
+
 			$data 								= json_encode($data);
 
 			$data 								= str_replace('\/', '/', $data);
