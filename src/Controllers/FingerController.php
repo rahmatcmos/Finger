@@ -192,7 +192,7 @@ class FingerController extends Controller {
 
 			if(!count($data))
 			{
-				return Response::json(['message' => 'Empty'], 200);
+				return Response::json(['current_page' => 0, 'total_page' => 0, 'data' => 'empty'], 200);
 			}
 
 			$returned 							= ['current_page' => $contents->pagination->page, 'total_page' => $contents->pagination->total_page, 'data' => $data];
