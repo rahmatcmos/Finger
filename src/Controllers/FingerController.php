@@ -189,16 +189,19 @@ class FingerController extends Controller {
 			}
 			
 			$data 								= json_decode(json_encode($contents->data), true);
+
 			if(!count($data))
 			{
 				return Response::json(['message' => 'Empty'], 200);
 			}
 
-			$data 								= json_encode($data);
+			$returned 							= ['current_page' => $contents->pagination->page, 'total_page' => $contents->pagination->total_page, 'data' => $data];
 
-			$data 								= str_replace('\/', '/', $data);
+			$returned 							= json_encode($returned);
 
-			return $data; exit;
+			$returned 							= str_replace('\/', '/', $returned);
+
+			return $returned; exit;
 		}
 
 		return Response::json(['message' => 'Sukses'], 200);
