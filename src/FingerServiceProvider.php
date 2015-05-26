@@ -20,6 +20,7 @@ class FingerServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		\ThunderID\Finger\Models\Finger::observe(new \ThunderID\Finger\Models\Observers\FingerObserver);
+		\ThunderID\Finger\Models\FingerPrint::observe(new \ThunderID\Finger\Models\Observers\FingerPrintObserver);
 	}
 
 	/**
@@ -30,6 +31,7 @@ class FingerServiceProvider extends ServiceProvider {
 	public function register()
 	{
 		\ThunderID\Finger\Models\Finger::observe(new \ThunderID\Finger\Models\Observers\FingerObserver);
+		\ThunderID\Finger\Models\FingerPrint::observe(new \ThunderID\Finger\Models\Observers\FingerPrintObserver);
 	}
 
 	/**

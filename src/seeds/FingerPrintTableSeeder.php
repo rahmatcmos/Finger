@@ -2,24 +2,19 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-use ThunderID\Finger\Models\Finger;
+use ThunderID\Finger\Models\FingerPrint;
 use ThunderID\Person\Models\Person;
-use ThunderID\Organisation\Models\Chart;
+use ThunderID\Organisation\Models\Branch;
 use \Faker\Factory, Illuminate\Support\Facades\DB;
 
-class FingerTableSeeder extends Seeder
+class FingerPrintTableSeeder extends Seeder
 {
 	function run()
 	{
 
-		// DB::table('fingers')->truncate();
-
+		DB::table('finger_prints')->truncate();
 		try
 		{
-			foreach(range(1, 1) as $index)
-			{
-				
-			} 
 
 		}
 		catch (Exception $e) 

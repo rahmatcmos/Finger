@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder {
 		Model::unguard();
 
 		$this->call('\ThunderID\Finger\seeds\FingerTableSeeder');
+		$this->call('\ThunderID\Finger\seeds\FingerPrintTableSeeder');
 	}
 
 }
