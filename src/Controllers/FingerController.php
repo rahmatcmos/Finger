@@ -32,7 +32,7 @@ class FingerController extends Controller {
 
 		$api 									= $attributes['application']['api'];
 		$checking 								= Device::checking($api['client'], $api['secret']);
-		if(!$checking)
+		if($checking==false)
 		{
 			return Response::json(['message' => 'Not Found'], 404);
 		}
@@ -98,7 +98,7 @@ class FingerController extends Controller {
 					$log['pc']					= $api['client'];
 					$log['on']					= date('Y-m-d H:i:s');
 					$log['message']				= json_encode($person->meta->errors);
-					$saved_error_log 			= $this->dispatch(new Saving(new ErrorLog, $log, null, new Organisation, 1));
+					$saved_error_log 			= $this->dispatch(new Saving(new ErrorLog, $log, null, new Organisation, $checking));
 				}
 				else
 				{
@@ -115,7 +115,7 @@ class FingerController extends Controller {
 							$log['pc']			= $api['client'];
 							$log['on']			= date('Y-m-d H:i:s');
 							$log['message']		= json_encode($is_success_2->meta->errors);
-							$saved_error_log 	= $this->dispatch(new Saving(new ErrorLog, $log, null, new Organisation, 1));
+							$saved_error_log 	= $this->dispatch(new Saving(new ErrorLog, $log, null, new Organisation, $checking));
 						}
 					}
 					else
@@ -125,7 +125,7 @@ class FingerController extends Controller {
 						$log['pc']				= $api['client'];
 						$log['on']				= date('Y-m-d H:i:s');
 						$log['message']			= json_encode($finger->meta->errors);
-						$saved_error_log 		= $this->dispatch(new Saving(new ErrorLog, $log, null, new Organisation, 1));
+						$saved_error_log 		= $this->dispatch(new Saving(new ErrorLog, $log, null, new Organisation, $checking));
 					}
 				}
 
@@ -153,7 +153,7 @@ class FingerController extends Controller {
 
 		$api 									= $attributes['application']['api'];
 		$checking 								= Device::checking($api['client'], $api['secret']);
-		if(!$checking)
+		if($checking==false)
 		{
 			return Response::json(['message' => 'Not Found'], 404);
 		}
@@ -223,31 +223,13 @@ class FingerController extends Controller {
 
 		$api 									= $attributes['application']['api'];
 		$checking 								= Device::checking($api['client'], $api['secret']);
-		if(!$checking)
+		if($checking==false)
 		{
 			return Response::json(['message' => 'Not Found'], 404);
 		}
 
-		$random 								= 	[
-														'left_thumb', 
-														'left_index_finger', 
-														'left_middle_finger', 
-														'left_ring_finger', 
-														'left_little_finger',
-														'right_thumb', 
-														'right_index_finger', 
-														'right_middle_finger', 
-														'right_ring_finger', 
-														'right_little_finger',
-													];
-
-		$count 									= 3;
-
-		foreach (range(1, $count) as $index) 
-		{
-			$content[]							= $random[rand(0, count($random)-1)];
-		}	
+		$checking 								= Device::finger($api['client'], $api['secret']);
 	
-		return Response::json(['finger' => $content], 200);
+		return Response::json(['finger' => $checking], 200);
 	}
 }
