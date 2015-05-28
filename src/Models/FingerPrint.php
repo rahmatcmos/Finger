@@ -34,7 +34,7 @@ use Str, Validator, DateTime, Exception;
 
 class FingerPrint extends BaseModel {
 
-	use SoftDeletes;
+	//use SoftDeletes;
 	use \ThunderID\Finger\Models\Relations\BelongsTo\HasBranchTrait;
 
 	public 		$timestamps 		= 	true;
