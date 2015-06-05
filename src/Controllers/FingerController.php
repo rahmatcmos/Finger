@@ -102,7 +102,7 @@ class FingerController extends Controller {
 				}
 				else
 				{
-					$data 						= $this->dispatch(new Getting(new Finger, ['personid' => $person->data->id, 'stillwork' => ''], [] ,1, 1));
+					$data 						= $this->dispatch(new Getting(new Finger, ['personid' => $person->data->id, 'stillwork' => $checking], [] ,1, 1));
 					$finger 					= json_decode($data);
 					if($finger->meta->success)
 					{
